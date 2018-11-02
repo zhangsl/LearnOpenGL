@@ -1,0 +1,8 @@
+/build
+/.idea
+.settings/
+.project
+local.properties
+app/build
+LearnOpenGL.iml
+.gradle
