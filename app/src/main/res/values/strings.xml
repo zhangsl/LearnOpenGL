@@ -2,4 +2,5 @@
     <string name="app_name">LearnOpenGL</string>
     <string name="triangle">三角形</string>
     <string name="square">正方形</string>
+    <string name="colorful_triangle">彩色三角形</string>
 </resources>

@@ -31,4 +31,11 @@ public class MainActivity extends Activity {
         intent.putExtra("shape", "square");
         startActivity(intent);
     }
+
+    @OnClick(R.id.btn_colorful_triangle)
+    public void showColorTriangle(Button btn) {
+        Intent intent = new Intent(this, StartOpenGLActivity.class);
+        intent.putExtra("shape", "colorTriangle");
+        startActivity(intent);
+    }
 }

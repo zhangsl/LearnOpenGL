@@ -7,7 +7,6 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.os.SystemClock;
-import android.text.TextUtils;
 import android.util.Log;
 import me.light.learnopengl.Utils;
 
@@ -18,16 +17,13 @@ import me.light.learnopengl.Utils;
 public class MyGlRender implements GLSurfaceView.Renderer {
     private static final String TAG = "StartRender";
 
-    private Triangle mTriangle;
-    private Square mSquare;
 
     private final float[] mMVPMatrix = new float[16];
     private final float[] mProjectionMatrix = new float[16];
     private final float[] mViewMatrix = new float[16];
     private float[] mRotationMatrix = new float[16];
-
-
-    private String mShape;
+    private ShapeCreator mShapeCreator;
+    private Shape mShape;
 
     @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
@@ -40,8 +36,7 @@ public class MyGlRender implements GLSurfaceView.Renderer {
         GLES20.glViewport(0, 0, width, height);
         float ratio = (float)width / height;
         Log.d(TAG, "surface changed");
-        mTriangle = new Triangle();
-        mSquare = new Square();
+        mShape = mShapeCreator.create();
         Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1,1, 3, 7);
     }
 
@@ -60,16 +55,12 @@ public class MyGlRender implements GLSurfaceView.Renderer {
         float angle = 0.090f * ((int)time);
         Matrix.setRotateM(mRotationMatrix, 0, angle, 0, 0, -1.0f);
         Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
+        mShape.draw(scratch);
 
-        if (TextUtils.equals(mShape, "triangle")) {
-            mTriangle.draw(scratch);
-        } else if (TextUtils.equals(mShape, "square")) {
-            mSquare.draw(scratch);
-        }
     }
 
-    public void setShape(String shape) {
-        mShape = shape;
+    public void setShapeCreator(ShapeCreator shape) {
+        mShapeCreator = shape;
     }
 
 }
