@@ -5,6 +5,7 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 import android.opengl.GLES20;
+import android.util.Log;
 import me.light.learnopengl.Utils;
 
 /**

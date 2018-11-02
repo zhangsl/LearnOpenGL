@@ -25,6 +25,14 @@ public class Utils {
         GLES20.glShaderSource(shader, shaderCode);
         GLES20.glCompileShader(shader);
 
+        final int[] compileStatus = new int[1];
+        GLES20.glGetShaderiv(shader, GLES20.GL_COMPILE_STATUS, compileStatus, 0);
+
+        // If the compilation failed, delete the shader.
+        if (compileStatus[0] == 0)
+        {
+            Log.e("ColorTriangle", "loadShader error   " + shaderCode);
+        }
         return shader;
     }
 }

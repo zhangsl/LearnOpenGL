@@ -5,6 +5,7 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 import android.opengl.GLES20;
+import android.util.Log;
 import me.light.learnopengl.Utils;
 
 /**
@@ -27,11 +28,12 @@ public class ColorTriangle extends Shape {
             + "varying vec4 vColor;"
             + "void main(){"
             + "     vColor = aColor;"
-            + "     gl_Position = uMVPMatrix * vPosition;"
+            + "     gl_Position = uMVPMatrix * aPosition;"
             + "}";
 
     private final String fragmentShader =
-         "varying vec4 vColor;"
+        "precision mediump float;"
+            + "varying vec4 vColor;"
             + "void main(){"
             + "     gl_FragColor = vColor;"
             + "}";
@@ -59,18 +61,19 @@ public class ColorTriangle extends Shape {
         mProgram = GLES20.glCreateProgram();
         GLES20.glAttachShader(mProgram, vertexShaderHandler);
         GLES20.glAttachShader(mProgram, fragmentShaderHandler);
+        GLES20.glBindAttribLocation(mPositionHandler, 0, "aPosition");
+        GLES20.glBindAttribLocation(mPositionHandler, 1, "aColor");
         GLES20.glLinkProgram(mProgram);
+
         GLES20.glDeleteShader(vertexShaderHandler);
         GLES20.glDeleteShader(fragmentShaderHandler);
     }
 
     @Override
     public void draw(float[] matrix) {
+        GLES20.glUseProgram(mProgram);
         mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix");
         GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, matrix, 0);
-
-        GLES20.glBindAttribLocation(mPositionHandler, 0, "aPosition");
-        GLES20.glBindAttribLocation(mPositionHandler, 1, "aColor");
 
         vertexBuffers.position(POSITION_OFFSET);
         mPositionHandler = GLES20.glGetAttribLocation(mProgram, "aPosition");
