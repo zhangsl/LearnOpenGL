@@ -14,8 +14,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Utils.sContext = getApplicationContext();
         ButterKnife.bind(this);
-
     }
 
     @OnClick(R.id.btn_triangle)
@@ -36,6 +36,13 @@ public class MainActivity extends Activity {
     public void showColorTriangle(Button btn) {
         Intent intent = new Intent(this, StartOpenGLActivity.class);
         intent.putExtra("shape", "colorTriangle");
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_texture_square)
+    public void showTextureSquare(Button btn) {
+        Intent intent = new Intent(this, StartOpenGLActivity.class);
+        intent.putExtra("shape", "textureSquare");
         startActivity(intent);
     }
 }

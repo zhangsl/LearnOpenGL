@@ -1,5 +1,12 @@
 package me.light.learnopengl;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.util.Log;
 
@@ -8,6 +15,7 @@ import android.util.Log;
  */
 
 public class Utils {
+    public static Context sContext;
     public static void printMatrix(String tag, String prefer, float[] matrix) {
         StringBuilder mvpMatrixStr = new StringBuilder();
         for (int i = 0, len = matrix.length; i < len; i++) {
@@ -34,5 +42,36 @@ public class Utils {
             Log.e("ColorTriangle", "loadShader error   " + shaderCode);
         }
         return shader;
+    }
+
+    public static Bitmap loadBitmapFromAssets(String filePath) {
+        AssetManager assetManager = sContext.getAssets();
+
+        InputStream istr = null;
+        Bitmap bitmap = null;
+        try {
+            istr = assetManager.open(filePath);
+            bitmap = BitmapFactory.decodeStream(istr);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (istr != null) {
+                    istr.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return bitmap;
+    }
+
+    public static void checkGlError(String glOperation) {
+        int error;
+        while ((error = GLES20.glGetError()) != GLES20.GL_NO_ERROR) {
+            Log.e("LearnOpenGL", glOperation + ": glError " + error);
+            throw new RuntimeException(glOperation + ": glError " + error);
+        }
     }
 }
