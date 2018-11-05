@@ -9,3 +9,6 @@
 #### texture
 在基础图形绘制的基础上，加上纹理渲染。纹理渲染和动画是一些贴纸特效的技术基础。
 ![texture-square](docs/texture_square.gif)
+
+### cube
+立方体绘制，涉及3D绘制，以及光照效果。
