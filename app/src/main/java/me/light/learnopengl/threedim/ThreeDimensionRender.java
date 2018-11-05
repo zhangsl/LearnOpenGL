@@ -54,15 +54,14 @@ public class ThreeDimensionRender implements IRender {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
         Log.d(TAG, "draw frame");
-        Matrix.setLookAtM(mViewMatrix, 0, 0, 0, -3, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+        Matrix.setLookAtM(mViewMatrix, 0, 3, 3, -3, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
         Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
 
-        //long time = SystemClock.uptimeMillis() % 4000L;
-        //float angle = 0.090f * ((int)time);
-        //Matrix.setRotateM(mRotationMatrix, 0, angle, 0.5f, 1.0f, 0.0f);
-        //Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
-        mShape.draw(mMVPMatrix);
-        //mAngle += 0.4f;
+        long time = SystemClock.uptimeMillis() % 4000L;
+        float angle = 0.090f * ((int)time);
+        Matrix.setRotateM(mRotationMatrix, 0, angle, 0.5f, 1.0f, 0.0f);
+        Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
+        mShape.draw(scratch);
     }
 
     @Override
