@@ -149,7 +149,7 @@ public class Cube extends Shape {
 
         mLightPosHandler = GLES20.glGetUniformLocation(mProgram, "uLightPos");
         Utils.checkGlError("get light pos");
-        GLES20.glUniform3f(mLightPosHandler, 1.2f, 1.0f, 2.0f);
+        GLES20.glUniform3f(mLightPosHandler, 4f, 4.0f, 3.0f);
 
         mLightColorHandler = GLES20.glGetUniformLocation(mProgram, "uLightColor");
         Utils.checkGlError("get light color");
@@ -161,7 +161,7 @@ public class Cube extends Shape {
 
         mAmbientStrength = GLES20.glGetUniformLocation(mProgram, "uAmbientStrength");
         Utils.checkGlError("get ambient strength");
-        GLES20.glUniform1f(mAmbientStrength, 0.1f);
+        GLES20.glUniform1f(mAmbientStrength, 0.2f);
 
         mDiffuseStrength = GLES20.glGetUniformLocation(mProgram, "uDiffuseStrength");
         Utils.checkGlError("get diffuse strength");

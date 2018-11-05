@@ -12,3 +12,4 @@
 
 ### cube
 立方体绘制，涉及3D绘制，以及光照效果。
+![cube](docs/cube.gif)
