@@ -4,12 +4,10 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import android.opengl.GLES20;
-import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.os.SystemClock;
 import android.util.Log;
 import me.light.learnopengl.IRender;
-import me.light.learnopengl.Utils;
 import me.light.learnopengl.shape.Shape;
 import me.light.learnopengl.shape.ShapeCreator;
 
@@ -20,13 +18,9 @@ import me.light.learnopengl.shape.ShapeCreator;
 public class ThreeDimensionRender implements IRender {
     private static final String TAG = "StartRender";
 
-
     private final float[] mMVPMatrix = new float[16];
     private final float[] mProjectionMatrix = new float[16];
     private final float[] mViewMatrix = new float[16];
-    private float mTransY=0;
-    private float mTransX=0;
-    private float mAngle=0;
     private float[] mRotationMatrix = new float[16];
     private ShapeCreator mShapeCreator;
     private Shape mShape;
@@ -45,7 +39,7 @@ public class ThreeDimensionRender implements IRender {
         float ratio = (float)width / height;
         Log.d(TAG, "surface changed");
         mShape = mShapeCreator.create();
-        Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1,1, 3, 7);
+        Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
     }
 
     @Override
