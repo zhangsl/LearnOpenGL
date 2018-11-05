@@ -1,4 +1,4 @@
-package me.light.learnopengl.shape;
+package me.light.learnopengl.threedim;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -10,18 +10,23 @@ import android.os.SystemClock;
 import android.util.Log;
 import me.light.learnopengl.IRender;
 import me.light.learnopengl.Utils;
+import me.light.learnopengl.shape.Shape;
+import me.light.learnopengl.shape.ShapeCreator;
 
 /**
- * Created by shangjie on 2018/11/1.
+ * Created by shangjie on 2018/11/5.
  */
 
-public class MyGlRender implements IRender {
+public class ThreeDimensionRender implements IRender {
     private static final String TAG = "StartRender";
 
 
     private final float[] mMVPMatrix = new float[16];
     private final float[] mProjectionMatrix = new float[16];
     private final float[] mViewMatrix = new float[16];
+    private float mTransY=0;
+    private float mTransX=0;
+    private float mAngle=0;
     private float[] mRotationMatrix = new float[16];
     private ShapeCreator mShapeCreator;
     private Shape mShape;
@@ -35,6 +40,7 @@ public class MyGlRender implements IRender {
     @Override
     public void onSurfaceChanged(GL10 gl10, int width, int height) {
         GLES20.glViewport(0, 0, width, height);
+
         float ratio = (float)width / height;
         Log.d(TAG, "surface changed");
         mShape = mShapeCreator.create();
@@ -44,25 +50,27 @@ public class MyGlRender implements IRender {
     @Override
     public void onDrawFrame(GL10 gl10) {
         float[] scratch = new float[16];
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         Log.d(TAG, "draw frame");
         Matrix.setLookAtM(mViewMatrix, 0, 0, 0, -3, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
 
-        Utils.printMatrix(TAG, "View Matrix", mViewMatrix);
+        Matrix.setIdentityM(mRotationMatrix, 0);
+        Matrix.translateM(mRotationMatrix, 0, mTransX, mTransY, 0);
+        Matrix.rotateM(mRotationMatrix, 0, mAngle, 1.0f, 1.0f, 1.0f);
+        //Matrix.multiplyMM(mMVPMatrix, 0, mViewMatrix, 0, mRotationMatrix, 0);
         Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
-        Utils.printMatrix(TAG, "MVP Matrix", mMVPMatrix);
 
         long time = SystemClock.uptimeMillis() % 4000L;
         float angle = 0.090f * ((int)time);
-        Matrix.setRotateM(mRotationMatrix, 0, angle, 0, 0, -1.0f);
+        Matrix.setRotateM(mRotationMatrix, 0, angle, 0.5f, 1.0f, 0.0f);
         Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
         mShape.draw(scratch);
-
+        //mAngle += 0.4f;
     }
 
     @Override
     public void setShapeCreator(ShapeCreator shape) {
         mShapeCreator = shape;
     }
-
 }

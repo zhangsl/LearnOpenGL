@@ -45,4 +45,11 @@ public class MainActivity extends Activity {
         intent.putExtra("shape", "textureSquare");
         startActivity(intent);
     }
+
+    @OnClick(R.id.btn_cube)
+    public void showCube(Button btn) {
+        Intent intent = new Intent(this, StartOpenGLActivity.class);
+        intent.putExtra("shape", "cube");
+        startActivity(intent);
+    }
 }
