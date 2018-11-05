@@ -39,29 +39,39 @@ public class Utils {
         // If the compilation failed, delete the shader.
         if (compileStatus[0] == 0)
         {
+            String msg = GLES20.glGetShaderInfoLog(shader);
+            Log.e("ColorTriangle", "shader info:  " + msg);
             Log.e("ColorTriangle", "loadShader error   " + shaderCode);
         }
         return shader;
     }
 
+    public static int loadShaderFromAssets(int type, String fileName) {
+        return loadShader(type, loadFromAssetsFile(fileName));
+    }
+
+    public static String loadFromAssetsFile(String fname) {
+        StringBuilder result = new StringBuilder();
+        try ( InputStream is = sContext.getAssets().open(fname)){
+            int ch;
+            byte[] buffer = new byte[1024];
+            while (-1 != (ch = is.read(buffer))) {
+                result.append(new String(buffer, 0, ch));
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return result.toString().replaceAll("\\r\\n", "\n");
+    }
+
     public static Bitmap loadBitmapFromAssets(String filePath) {
         AssetManager assetManager = sContext.getAssets();
 
-        InputStream istr = null;
         Bitmap bitmap = null;
-        try {
-            istr = assetManager.open(filePath);
+        try (InputStream istr = assetManager.open(filePath);){
             bitmap = BitmapFactory.decodeStream(istr);
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (istr != null) {
-                    istr.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
         return bitmap;

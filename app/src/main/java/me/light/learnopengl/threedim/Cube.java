@@ -15,88 +15,80 @@ import me.light.learnopengl.shape.Shape;
 
 public class Cube extends Shape {
     private final float vertexCoords[] = {
-        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-        0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+        // 顶点坐标             //纹理坐标   //顶点法向量，用于计算光照漫反射
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 0.0f,  0.0f, -1.0f,
+        0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 0.0f,  0.0f, -1.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 0.0f,  0.0f, -1.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 0.0f,  0.0f, -1.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 0.0f,  0.0f, -1.0f,
 
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-        0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-        0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
+        0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f,  0.0f, 1.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
 
-        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f,  1.0f, 1.0f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f, -1.0f,  0.0f,  0.0f,
 
-        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-        0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-        0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 1.0f,  0.0f,  0.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,  0.0f,  0.0f,
+        0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 1.0f,  0.0f,  0.0f,
+        0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 1.0f,  0.0f,  0.0f,
+        0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f,  0.0f,  0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 1.0f,  0.0f,  0.0f,
 
-        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-        0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f, -1.0f,  0.0f,
+        0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 0.0f, -1.0f,  0.0f,
+        0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f, -1.0f,  0.0f,
+        0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f, -1.0f,  0.0f,
 
-        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f,  1.0f,  0.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 0.0f,  1.0f,  0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f,  1.0f,  0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f,  1.0f,  0.0f
     };
 
-    private final String vertexShader =
-        "uniform mat4 uMVPMatrix;"
-            + "attribute vec4 aPosition;"
-            + "attribute vec2 aTextureCoords;"
-            + "varying vec4 vColor;"
-            + "varying vec2 vTextureCoords;"
-            + "void main(){"
-            + "     vTextureCoords = aTextureCoords;"
-            + "     gl_Position = uMVPMatrix * aPosition;"
-            + "}";
 
-    private final String fragmentShader =
-        "precision mediump float;"
-            + "varying vec2 vTextureCoords;"
-            + "uniform sampler2D uTexture;"
-            + "void main(){"
-            + "     gl_FragColor = texture2D(uTexture, vTextureCoords);"
-            + "}";
-
-    private FloatBuffer vertexBuffers;
+    private final FloatBuffer vertexBuffers;
     private static final int COORDS_PER_VERTEX = 3;
     private static final int COORDS_PER_TEXTURE = 2;
-    private static final int VERTEX_STRIDE = 5 * 4;
+    private static final int COORDS_PER_NORMAL = 3;
+    private static final int VERTEX_STRIDE = 8 * 4;
     private static final int VERTEX_COUNT = 36;
     private static final int POSITION_OFFSET = 0;
     private static final int TEXTURE_OFFSET = 3;
+    private static final int NORMAL_OFFSET = 5;
     private int mProgram;
     private int mPositionHandler;
     private int mTextureCoordsHandler;
     private int mTextureHandler;
     private int mMVPMatrixHandle;
+    private int mNormalHandler;
+    private int mLightPosHandler;
+    private int mLightColorHandler;
+    private int mObjectColorHandler;
+    private int mAmbientStrength;
+    private int mDiffuseStrength;
+    private int mSpecularStrength;
 
     public Cube() {
         vertexBuffers = ByteBuffer.allocateDirect(vertexCoords.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
         vertexBuffers.put(vertexCoords);
         vertexBuffers.position(0);
 
-        int vertexShaderHandler = Utils.loadShader(GLES20.GL_VERTEX_SHADER, vertexShader);
-        int fragmentShaderHandler = Utils.loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShader);
+        int vertexShaderHandler = Utils.loadShaderFromAssets(GLES20.GL_VERTEX_SHADER, "threedim/cube.vsh");
+        int fragmentShaderHandler = Utils.loadShaderFromAssets(GLES20.GL_FRAGMENT_SHADER, "threedim/cube.fsh");
 
         mProgram = GLES20.glCreateProgram();
         GLES20.glAttachShader(mProgram, vertexShaderHandler);
@@ -149,6 +141,35 @@ public class Cube extends Shape {
         GLES20.glVertexAttribPointer(mTextureCoordsHandler, COORDS_PER_TEXTURE, GLES20.GL_FLOAT, false, VERTEX_STRIDE, vertexBuffers);
         GLES20.glEnableVertexAttribArray(mTextureCoordsHandler);
 
+        vertexBuffers.position(NORMAL_OFFSET);
+        mNormalHandler = GLES20.glGetAttribLocation(mProgram, "aNormal");
+        Utils.checkGlError("get normal");
+        GLES20.glVertexAttribPointer(mNormalHandler, COORDS_PER_NORMAL, GLES20.GL_FLOAT, false, VERTEX_STRIDE, vertexBuffers);
+        GLES20.glEnableVertexAttribArray(mNormalHandler);
+
+        mLightPosHandler = GLES20.glGetUniformLocation(mProgram, "uLightPos");
+        Utils.checkGlError("get light pos");
+        GLES20.glUniform3f(mLightPosHandler, 1.2f, 1.0f, 2.0f);
+
+        mLightColorHandler = GLES20.glGetUniformLocation(mProgram, "uLightColor");
+        Utils.checkGlError("get light color");
+        GLES20.glUniform3f(mLightColorHandler, 1.0f, 1.0f, 1.0f);
+
+        mObjectColorHandler = GLES20.glGetUniformLocation(mProgram, "uObjectColor");
+        Utils.checkGlError("get object color");
+        GLES20.glUniform4f(mObjectColorHandler, 1.0f, 0.5f, 0.31f, 1.0f);
+
+        mAmbientStrength = GLES20.glGetUniformLocation(mProgram, "uAmbientStrength");
+        Utils.checkGlError("get ambient strength");
+        GLES20.glUniform1f(mAmbientStrength, 0.1f);
+
+        mDiffuseStrength = GLES20.glGetUniformLocation(mProgram, "uDiffuseStrength");
+        Utils.checkGlError("get diffuse strength");
+        GLES20.glUniform1f(mDiffuseStrength, 1.0f);
+
+        mSpecularStrength = GLES20.glGetAttribLocation(mProgram, "uSpecularStrength");
+        Utils.checkGlError("get specular strength");
+        GLES20.glUniform1f(mSpecularStrength, 0.5f);
 
         mTextureHandler = GLES20.glGetUniformLocation(mProgram, "uTexture");
         Utils.checkGlError("get texture location");

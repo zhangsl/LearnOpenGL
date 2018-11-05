@@ -28,6 +28,7 @@ public class ThreeDimensionRender implements IRender {
     @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        //启用深度测试
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         Log.d(TAG, "surface created");
     }
