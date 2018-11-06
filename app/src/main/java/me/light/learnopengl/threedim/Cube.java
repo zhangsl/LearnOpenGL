@@ -149,7 +149,7 @@ public class Cube extends Shape {
 
         mLightPosHandler = GLES20.glGetUniformLocation(mProgram, "uLightPos");
         Utils.checkGlError("get light pos");
-        GLES20.glUniform3f(mLightPosHandler, 4f, 4.0f, 3.0f);
+        GLES20.glUniform3f(mLightPosHandler, 3.0f, 3.0f, -6.0f);
 
         mLightColorHandler = GLES20.glGetUniformLocation(mProgram, "uLightColor");
         Utils.checkGlError("get light color");

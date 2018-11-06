@@ -23,9 +23,9 @@ void main(){
 
     //镜面反射计算
     vec3 lightDirection=normalize(uLightPos-vFragPos);
-    vec3 viewDirection=normalize(vec3(0,0,uLightPos.z)-vFragPos);
+    vec3 viewDirection=normalize(vec3(3,3,-3)-vFragPos);
     vec3 hafVector=normalize(lightDirection+viewDirection);
-    float specularDiff=pow(max(dot(vNormal,hafVector),0.0),4.0);
+    float specularDiff=pow(max(dot(vNormal,hafVector),0.0),32.0);
     vec3 specular=uSpecularStrength*specularDiff*uLightColor;
     vec4 specularColor = vec4(specular,1.0);
 
