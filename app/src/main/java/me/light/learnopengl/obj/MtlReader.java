@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import android.content.Intent;
 import me.light.learnopengl.obj.*;
 import me.light.learnopengl.obj.DefaultMtl;
 
@@ -165,15 +166,35 @@ public class MtlReader
                 String mapKd = line.substring("map_Kd".length()).trim();
                 currentMtl.setMapKd(mapKd);
             }
-            else if (identifier.equalsIgnoreCase("d"))
-            {
-                float d = parse(st.nextToken());
-                currentMtl.setD(d);
+            else if (identifier.equalsIgnoreCase("map_Ks")) {
+                String mapKs = line.substring("map_Ks".length()).trim();
+                currentMtl.setMapKs(mapKs);
             }
-            else if (identifier.equalsIgnoreCase("Ns"))
-            {
-                float ns = parse(st.nextToken());
-                currentMtl.setNs(ns);
+            else if (identifier.equalsIgnoreCase("map_Ka")) {
+                String mapKa = line.substring("map_Ka".length()).trim();
+                currentMtl.setMapKa(mapKa);
+            }
+
+            else {
+                if (identifier.equalsIgnoreCase("d")) {
+                    float d = parse(st.nextToken());
+                    currentMtl.setD(d);
+                } else if (identifier.equalsIgnoreCase("Ns")) {
+                    float ns = parse(st.nextToken());
+                    currentMtl.setNs(ns);
+                }
+                else if (identifier.equalsIgnoreCase("Ni")) {
+                    float ni = parse(st.nextToken());
+                    currentMtl.setNi(ni);
+                }
+                else if (identifier.equalsIgnoreCase("illum")) {
+                    try {
+                        int illum = Integer.parseInt(st.nextToken());
+                        currentMtl.setIllum(illum);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
         return mtlList;

@@ -108,12 +108,30 @@ public interface Mtl
      */
     String getMapKd();
 
+
     /**
      * Set the diffuse map name of this material
      * 
      * @param mapKd The diffuse map name of this material
      */
     void setMapKd(String mapKd);
+
+
+    String getMapKa();
+
+    void setMapKa(String mapKa);
+
+    String getMapKs();
+
+    void setMapKs(String mapKs);
+
+    int getIllum();
+
+    void setIllum(int illum);
+
+    float getNi();
+
+    void setNi(float ni);
     
     /**
      * Returns the shininess of the material.

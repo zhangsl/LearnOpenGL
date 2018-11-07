@@ -58,6 +58,14 @@ final class DefaultMtl implements Mtl
      * The diffuse map of this material
      */
     private String mapKd;
+
+    private String mapKs;
+
+    private String mapKa;
+
+    private int illum;
+
+    private float ni;
     
     /**
      * The shininess of this material
@@ -167,6 +175,47 @@ final class DefaultMtl implements Mtl
     public float getD()
     {
         return d;
+    }
+
+    @Override
+    public String getMapKa() {
+        return this.mapKa;
+    }
+
+    @Override
+    public void setMapKa(String mapKa) {
+        this.mapKa = mapKa;
+    }
+
+    @Override
+    public int getIllum() {
+        return illum;
+    }
+
+    @Override
+    public void setIllum(int illum) {
+        this.illum = illum;
+    }
+
+    @Override
+    public float getNi() {
+        return ni;
+    }
+
+    @Override
+    public void setNi(float ni) {
+        this.ni = ni;
+    }
+
+    @Override
+    public String getMapKs() {
+        return this.mapKs;
+
+    }
+
+    @Override
+    public void setMapKs(String mapKs) {
+        this.mapKs = mapKs;
     }
 
     @Override

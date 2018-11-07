@@ -44,7 +44,7 @@ public class Objs
      */
     public static me.light.learnopengl.obj.Obj create()
     {
-        return new me.light.learnopengl.obj.DefaultObj();
+        return new DefaultObj();
     }
     
     /**

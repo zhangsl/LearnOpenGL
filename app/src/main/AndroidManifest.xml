@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".shape.StartOpenGLActivity" />
+        <activity android:name=".model.ModelDisplayActivity"></activity>
     </application>
 
 </manifest>

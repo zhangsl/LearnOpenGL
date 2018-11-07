@@ -37,6 +37,5 @@ public class StartOpenGLActivity extends Activity {
         mGLSurfaceView = new MyGLSurfaceView(this);
         mGLSurfaceView.setRenderer(mRender);
         setContentView(mGLSurfaceView);
-
     }
 }

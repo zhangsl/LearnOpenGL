@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.widget.Button;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.light.learnopengl.model.ModelDisplayActivity;
 import me.light.learnopengl.shape.StartOpenGLActivity;
+import me.light.learnopengl.threedim.NanoSuit;
 
 public class MainActivity extends Activity {
 
@@ -16,6 +18,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         Utils.sContext = getApplicationContext();
         ButterKnife.bind(this);
+        NanoSuit suit = new NanoSuit();
+        suit.loadObj();
     }
 
     @OnClick(R.id.btn_triangle)
@@ -50,6 +54,12 @@ public class MainActivity extends Activity {
     public void showCube(Button btn) {
         Intent intent = new Intent(this, StartOpenGLActivity.class);
         intent.putExtra("shape", "cube");
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_nanosuit)
+    public void showNanoSuit(Button btn) {
+        Intent intent = new Intent(this, ModelDisplayActivity.class);
         startActivity(intent);
     }
 }
