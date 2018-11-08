@@ -37,7 +37,6 @@ public class Drawable {
     private static final int VERTEX_STRIDE = 3 * 4;
     private static final int NORMAL_STRIDE = 3 * 4;
     private static final int TEXTURE_STRIDE = 2 * 4;
-    private static final int VERTEX_COUNT = 36;
     private int mProgram;
     private int mPositionHandler;
     private int mTextureCoordsHandler;
@@ -96,7 +95,10 @@ public class Drawable {
         GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, matrix, 0);
         mVertexCoords.position(0);
         mTextureCoords.position(0);
-        mNormals.position(0);
+
+        if (mNormals != null) {
+            mNormals.position(0);
+        }
 
         GLES20.glVertexAttribPointer(mPositionHandler, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false, VERTEX_STRIDE, mVertexCoords);
         GLES20.glEnableVertexAttribArray(mPositionHandler);
@@ -104,8 +106,10 @@ public class Drawable {
         GLES20.glVertexAttribPointer(mTextureCoordsHandler, COORDS_PER_TEXTURE, GLES20.GL_FLOAT, false, TEXTURE_STRIDE, mTextureCoords);
         GLES20.glEnableVertexAttribArray(mTextureCoordsHandler);
 
-        GLES20.glVertexAttribPointer(mNormalHandler, COORDS_PER_NORMAL, GLES20.GL_FLOAT, false, NORMAL_STRIDE, mNormals);
-        GLES20.glEnableVertexAttribArray(mNormalHandler);
+        if (mNormals != null) {
+            GLES20.glVertexAttribPointer(mNormalHandler, COORDS_PER_NORMAL, GLES20.GL_FLOAT, false, NORMAL_STRIDE, mNormals);
+            GLES20.glEnableVertexAttribArray(mNormalHandler);
+        }
 
         GLES20.glUniform3f(mLightPosHandler, 0.0f, -200.0f, -500.0f);
 

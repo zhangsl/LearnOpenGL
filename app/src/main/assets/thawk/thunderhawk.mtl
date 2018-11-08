@@ -1,0 +1,65 @@
+# Exported from 3D Builder
+
+newmtl carlingue
+Kd 1.000000 1.000000 1.000000
+map_Kd carlingue.1Couleur_de_surface.jpg
+
+newmtl bolter_avant_D_1_1
+Kd 1.000000 1.000000 1.000000
+map_Kd bolter_aile_gaucheCouleur_de_surface.jpg
+
+newmtl gouvernail
+Kd 1.000000 1.000000 1.000000
+map_Kd gouvernailCouleur_de_surface.jpg
+
+newmtl baie_ouvrant_cokpit
+Kd 1.000000 1.000000 1.000000
+map_Kd baie_ouvrant_cokpit-poser.jpg
+
+newmtl D_sas_lateral
+Kd 1.000000 1.000000 1.000000
+map_Kd D_sas_lateral.1Couleur_de_surface.jpg
+
+newmtl G_sas_lateral
+Kd 1.000000 1.000000 1.000000
+map_Kd G_sas_lateral.1Couleur_de_surface.jpg
+
+newmtl canon
+Kd 1.000000 1.000000 1.000000
+map_Kd canonCouleur_de_surface.jpg
+
+newmtl porte_ventrale_avant
+Kd 1.000000 1.000000 1.000000
+map_Kd porte_ventrale_avantCouleur_de_surface.jpg
+
+newmtl G_aile_variable
+Kd 1.000000 1.000000 1.000000
+map_Kd G_aile_variableCouleur_de_surface.jpg
+
+newmtl D_aile_variable
+Kd 1.000000 1.000000 1.000000
+map_Kd D_aile_variableCouleur_de_surface.jpg
+
+newmtl carlingue-corection
+Kd 1.000000 1.000000 1.000000
+map_Kd carlingue-corectionCouleur_de_surface.jpg
+
+newmtl D_Patin_arriere
+Kd 1.000000 1.000000 1.000000
+map_Kd D_Patin_arriere.1Couleur_de_surface.jpg
+
+newmtl G_Patin_arriere
+Kd 1.000000 1.000000 1.000000
+map_Kd G_Patin_arriere.1Couleur_de_surface.jpg
+
+newmtl patin_avant
+Kd 1.000000 1.000000 1.000000
+map_Kd patin_avant.1Couleur_de_surface.jpg
+
+newmtl element_aileron_avant
+Kd 1.000000 1.000000 1.000000
+map_Kd element_aileron_avantCouleur_de_surface.jpg
+
+newmtl interieur_bas
+Kd 1.000000 1.000000 1.000000
+map_Kd interieur_basCouleur_de_surface.jpg
