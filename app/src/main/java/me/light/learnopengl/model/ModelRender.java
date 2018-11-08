@@ -24,7 +24,9 @@ public class ModelRender implements GLSurfaceView.Renderer {
     private float[] mRotationMatrix = new float[16];
     private ModelData mModelData;
     private List<Drawable> mDrawables;
-    float[] matrix = null;
+    private float mScaleX = 0.1f;
+    private float mScaleY = 0;
+    private float mScaleZ = 0.1f;
 
 
 
@@ -48,38 +50,29 @@ public class ModelRender implements GLSurfaceView.Renderer {
     public void onSurfaceChanged(GL10 gl10, int width, int height) {
         GLES20.glViewport(0, 0, width, height);
 
-        //float ratio = (float)width / height;
-        //Log.d(TAG, "surface changed");
-        //Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
-        //Matrix.scaleM(mProjectionMatrix, 0, 0.008f, 0.008f * width / height, 0.008f);
+        float ratio = (float)width / height;
+        Log.d(TAG, "surface changed");
+        Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
+        mScaleY = 0.1f * width / height;
 
-        matrix= new float[]{
-            1,0,0,0,
-            0,1,0,0,
-            0,0,1,0,
-            0,0,0,1
-        };;
-        Matrix.translateM(matrix,0,0,-0.3f,0);
-        Matrix.scaleM(matrix,0,0.1f,0.1f*width/height,0.1f);
     }
 
     @Override
     public void onDrawFrame(GL10 gl10) {
-        //float[] scratch = new float[16];
+        float[] scratch = new float[16];
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
         //
-        //Log.d(TAG, "draw frame");
-        //Matrix.setLookAtM(mViewMatrix, 0, 3, 3, -3, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
-        //Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
-        //
-        //long time = SystemClock.uptimeMillis() % 4000L;
-        //float angle = 0.090f * ((int)time);
-        //Matrix.setRotateM(mRotationMatrix, 0, angle, 0.5f, 1.0f, 0.0f);
-        //Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
+        Log.d(TAG, "draw frame");
+        Matrix.setLookAtM(mViewMatrix, 0, 3, 0, -3, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+        Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
 
+        long time = SystemClock.uptimeMillis() % 4000L;
+        float angle = 0.090f * ((int)time);
+        Matrix.setRotateM(mRotationMatrix, 0, angle, 0.0f, 1.0f, 0.0f);
+        Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
+        Matrix.scaleM(scratch, 0, mScaleX, mScaleY, mScaleZ);
         for (Drawable drawable : mDrawables) {
-            drawable.onDraw(matrix);
-            //drawable.onDraw(scratch);
+            drawable.onDraw(scratch);
         }
     }
 }
