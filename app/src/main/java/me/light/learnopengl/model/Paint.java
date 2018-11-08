@@ -52,10 +52,12 @@ public class Paint {
         GLES20.glAttachShader(mProgram, fragmentShaderHandler);
         GLES20.glLinkProgram(mProgram);
 
-        final int[] textureHandle = new int[1];
-        GLES20.glGenTextures(1, textureHandle, 0);
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[0]);
+        final int[] linkStatus = new int[1];
+        GLES20.glGetProgramiv(mProgram, GLES20.GL_LINK_STATUS, linkStatus, 0);
+        if (linkStatus[0] == 0)
+        {
+            throw new RuntimeException("link program error");
+        }
 
         // Set filtering
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER,
@@ -69,13 +71,6 @@ public class Paint {
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,
             GLES20.GL_CLAMP_TO_EDGE);
 
-
-
-        if (textureHandle[0] == 0)
-        {
-            throw new RuntimeException("Error loading texture.");
-        }
-
         GLES20.glDeleteShader(vertexShaderHandler);
         GLES20.glDeleteShader(fragmentShaderHandler);
 
@@ -85,8 +80,8 @@ public class Paint {
         GLES20.glUseProgram(mProgram);
         mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix");
         GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, matrix, 0);
-
-        for (Drawable drawable : mDrawables) {
+        Drawable drawable = mDrawables.get(0);
+        //for (Drawable drawable : mDrawables) {
             FloatBuffer vertexBuffers = drawable.getVertexCoords();
             vertexBuffers.position(0);
             FloatBuffer textureCoords = drawable.getTextureCoords();
@@ -94,8 +89,16 @@ public class Paint {
             FloatBuffer normalBuffer = drawable.getNormals();
             normalBuffer.position(0);
 
+            final int[] textureHandle = new int[1];
+            GLES20.glGenTextures(1, textureHandle, 0);
+            GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[0]);
             // Load the bitmap into the bound texture.
             GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, Utils.loadBitmapFromAssets("nanosuit/" + drawable.getDiffuseColorTexture()), 0);
+            if (textureHandle[0] == 0)
+            {
+                throw new RuntimeException("Error loading texture.");
+            }
 
             mPositionHandler = GLES20.glGetAttribLocation(mProgram, "aPosition");
             GLES20.glVertexAttribPointer(mPositionHandler, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false, VERTEX_STRIDE, vertexBuffers);
@@ -141,7 +144,7 @@ public class Paint {
             GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, VERTEX_COUNT);
             GLES20.glDisableVertexAttribArray(mPositionHandler);
             GLES20.glDisableVertexAttribArray(mTextureCoordsHandler);
-        }
+        //}
 
 
     }

@@ -22,21 +22,40 @@ import me.light.learnopengl.obj.ObjReader;
 public class DrawableCreator {
     public static List<Drawable> createDrawables(String objAssetsName, String mtlAssetsName) {
         List<Drawable> drawables = new ArrayList<>();
-        try (InputStreamReader objReader = new InputStreamReader(Utils.sContext.getAssets().open(objAssetsName));
-        InputStreamReader mtlReader = new InputStreamReader(Utils.sContext.getAssets().open(mtlAssetsName))) {
-            Obj obj = ObjReader.read(objReader);
-            List<Mtl> mtl = MtlReader.read(mtlReader);
-            int materialNum = obj.getNumMaterialGroups();
+        //try (InputStreamReader objReader = new InputStreamReader(Utils.sContext.getAssets().open(objAssetsName));
+        //InputStreamReader mtlReader = new InputStreamReader(Utils.sContext.getAssets().open(mtlAssetsName))) {
+        //    Obj obj = ObjReader.read(objReader);
+        //    List<Mtl> mtl = MtlReader.read(mtlReader);
+        //    int materialNum = obj.getNumMaterialGroups();
+        //
+        //    for (int i = 0; i < materialNum; i++) {
+        //        ObjGroup group = obj.getMaterialGroup(i);
+        //        Drawable drawable = group2Drawable(obj, group);
+        //        drawables.add(drawable);
+        //    }
+        //
+        //    addMtlInfo(drawables, mtl);
+        //} catch (IOException e) {
+        //    e.printStackTrace();
+        //}
 
-            for (int i = 0; i < materialNum; i++) {
-                ObjGroup group = obj.getMaterialGroup(i);
-                Drawable drawable = group2Drawable(obj, group);
-                drawables.add(drawable);
-            }
 
-            addMtlInfo(drawables, mtl);
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        List<Obj3D> model= me.light.learnopengl.model.ObjReader.readMultiObj(Utils.sContext,"assets/nanosuit/nanosuit.obj");
+        for (Obj3D obj : model) {
+            Drawable drawable = new Drawable();
+            drawable.setVertexCount(obj.vertCount);
+            drawable.setSpecularExponent(obj.mtl.Ns);
+            drawable.setSpecularColorTexutre(obj.mtl.map_Ks);
+            drawable.setSpecularColor(obj.mtl.Ks);
+            drawable.setDiffuseColorTexture(obj.mtl.map_Kd);
+            drawable.setDiffuseColor(obj.mtl.Kd);
+            drawable.setIlluminationModel(obj.mtl.illum);
+            drawable.setAmientColor(obj.mtl.Ka);
+            drawable.setBumpTexture(obj.mtl.map_Ka);
+            drawable.setNormals(obj.vertNorl);
+            drawable.setVertexCoords(obj.vert);
+            drawable.setTextureCoords(obj.vertTexture);
         }
 
         return drawables;
@@ -78,6 +97,7 @@ public class DrawableCreator {
         float[] vertexs = new float[faceNum * 9];
         float[] normals = new float[faceNum * 9];
         float[] textureVertexs = new float[faceNum * 6];
+        drawable.setVertexCount(faceNum * 3);
 
         for (int i = 0; i < faceNum; i++) {
             ObjFace face = group.getFace(i);

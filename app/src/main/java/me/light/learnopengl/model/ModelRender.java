@@ -1,5 +1,7 @@
 package me.light.learnopengl.model;
 
+import java.util.List;
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -20,18 +22,25 @@ public class ModelRender implements GLSurfaceView.Renderer {
     private final float[] mProjectionMatrix = new float[16];
     private final float[] mViewMatrix = new float[16];
     private float[] mRotationMatrix = new float[16];
-    private Paint mPaint;
+    private ModelData mModelData;
+    private List<Drawable> mDrawables;
+    float[] matrix = null;
 
-    public void setPaint(Paint paint) {
-        mPaint = paint;
+
+
+    public void setPaint(ModelData data) {
+        mModelData = data;
     }
 
     @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         //启用深度测试
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
-        mPaint.onCreate();
+        mDrawables = DrawableCreator.createDrawables(mModelData.objFile, mModelData.mtlFile);
+        for (Drawable drawable : mDrawables) {
+            drawable.onCreate();
+        }
         Log.d(TAG, "surface created");
     }
 
@@ -42,6 +51,16 @@ public class ModelRender implements GLSurfaceView.Renderer {
         float ratio = (float)width / height;
         Log.d(TAG, "surface changed");
         Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
+        Matrix.scaleM(mProjectionMatrix, 0, 0.008f, 0.008f * width / height, 0.008f);
+
+        matrix= new float[]{
+            1,0,0,0,
+            0,1,0,0,
+            0,0,1,0,
+            0,0,0,1
+        };;
+        Matrix.translateM(matrix,0,0,-0.3f,0);
+        Matrix.scaleM(matrix,0,0.1f,0.1f*width/height,0.1f);
     }
 
     @Override
@@ -57,6 +76,10 @@ public class ModelRender implements GLSurfaceView.Renderer {
         float angle = 0.090f * ((int)time);
         Matrix.setRotateM(mRotationMatrix, 0, angle, 0.5f, 1.0f, 0.0f);
         Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
-        mPaint.onDraw(scratch);
+
+        for (Drawable drawable : mDrawables) {
+            drawable.onDraw(matrix);
+            //drawable.onDraw(scratch);
+        }
     }
 }
