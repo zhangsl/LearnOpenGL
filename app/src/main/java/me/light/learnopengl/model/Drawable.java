@@ -90,6 +90,7 @@ public class Drawable {
     }
 
     public void onDraw(float[] matrix) {
+        Utils.printMatrix("Drawable", "matrix", matrix);
         GLES20.glUseProgram(mProgram);
 
         GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, matrix, 0);
@@ -106,7 +107,7 @@ public class Drawable {
         GLES20.glVertexAttribPointer(mNormalHandler, COORDS_PER_NORMAL, GLES20.GL_FLOAT, false, NORMAL_STRIDE, mNormals);
         GLES20.glEnableVertexAttribArray(mNormalHandler);
 
-        GLES20.glUniform3f(mLightPosHandler, 3.0f, 3.0f, -6.0f);
+        GLES20.glUniform3f(mLightPosHandler, 0.0f, -200.0f, -500.0f);
 
         float[] amient = getAmientColor();
         GLES20.glUniform3fv(mKaHandler, 1, amient, 0);

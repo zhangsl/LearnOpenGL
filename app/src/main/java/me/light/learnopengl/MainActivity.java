@@ -8,7 +8,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.light.learnopengl.model.ModelDisplayActivity;
 import me.light.learnopengl.shape.StartOpenGLActivity;
-import me.light.learnopengl.threedim.NanoSuit;
 
 public class MainActivity extends Activity {
 
@@ -18,8 +17,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         Utils.sContext = getApplicationContext();
         ButterKnife.bind(this);
-        NanoSuit suit = new NanoSuit();
-        suit.loadObj();
     }
 
     @OnClick(R.id.btn_triangle)
