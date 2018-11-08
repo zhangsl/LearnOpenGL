@@ -64,23 +64,23 @@ public class Drawable {
         GLES20.glAttachShader(mProgram, vertexShaderHandler);
         GLES20.glAttachShader(mProgram, fragmentShaderHandler);
         GLES20.glLinkProgram(mProgram);
+        final int[] linkStatus = new int[1];
+        GLES20.glGetProgramiv(mProgram, GLES20.GL_LINK_STATUS, linkStatus, 0);
+        if (linkStatus[0] == 0) {
+            throw new RuntimeException("link program error");
+        }
+
 
         mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix");
         mPositionHandler = GLES20.glGetAttribLocation(mProgram, "aPosition");
         mTextureCoordsHandler = GLES20.glGetAttribLocation(mProgram, "aTextureCoords");
         mNormalHandler = GLES20.glGetAttribLocation(mProgram, "aNormal");
         mLightPosHandler = GLES20.glGetUniformLocation(mProgram, "uLightPos");
+        mTextureValueHandler = GLES20.glGetUniformLocation(mProgram, "uTexture");
         mKaHandler = GLES20.glGetUniformLocation(mProgram, "uKa");
         mKsHandler = GLES20.glGetUniformLocation(mProgram, "uKs");
         mKdHandler = GLES20.glGetUniformLocation(mProgram, "uKd");
         mNsHandler = GLES20.glGetUniformLocation(mProgram, "uNs");
-
-        final int[] linkStatus = new int[1];
-        GLES20.glGetProgramiv(mProgram, GLES20.GL_LINK_STATUS, linkStatus, 0);
-        if (linkStatus[0] == 0)
-        {
-            throw new RuntimeException("link program error");
-        }
 
         mTextureHandler = createTexture("nanosuit/" + getDiffuseColorTexture());
 
@@ -109,27 +109,23 @@ public class Drawable {
         GLES20.glUniform3f(mLightPosHandler, 3.0f, 3.0f, -6.0f);
 
         float[] amient = getAmientColor();
-        GLES20.glUniform3f(mKaHandler, amient[0], amient[1], amient[2]);
+        GLES20.glUniform3fv(mKaHandler, 1, amient, 0);
 
         float[] specular = getSpecularColor();
-        GLES20.glUniform3f(mKsHandler, specular[0], specular[1], specular[2]);
+        GLES20.glUniform3fv(mKsHandler, 1, specular, 0);
 
         float[] diffuse = getDiffuseColor();
-        GLES20.glUniform3f(mKdHandler, diffuse[0], diffuse[1], diffuse[2]);
+        GLES20.glUniform3fv(mKdHandler, 1, diffuse, 0);
 
         GLES20.glUniform1f(mNsHandler, getSpecularExponent());
 
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureHandler);
-        mTextureValueHandler = GLES20.glGetUniformLocation(mProgram, "uTexture");
-        Utils.checkGlError("get texture location");
         GLES20.glUniform1i (mTextureValueHandler, 0);
 
         GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, mVertexCount);
         GLES20.glDisableVertexAttribArray(mPositionHandler);
         GLES20.glDisableVertexAttribArray(mTextureCoordsHandler);
-
-
     }
 
     private int createTexture(String imgPath){
