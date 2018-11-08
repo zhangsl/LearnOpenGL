@@ -13,3 +13,8 @@
 ### cube
 立方体绘制，涉及3D绘制，以及光照效果。
 ![cube](docs/cube.gif)
+
+
+### 3D模型加载
+加载3D模型并绘制。涉及3D模型文件OBJ的解析。OBJ文件的解析逻辑取自[AndroidOpenGLDemo](https://github.com/doggycoder/AndroidOpenGLDemo)。
+![nanosuit](docs/nanosuit.gif)
