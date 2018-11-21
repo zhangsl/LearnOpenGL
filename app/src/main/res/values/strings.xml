@@ -6,4 +6,5 @@
     <string name="texture_square">有纹理的正方形</string>
     <string name="cube">立方体</string>
     <string name="nanosuit">3D孤岛危机纳米装</string>
+    <string name="blur">背景模糊</string>
 </resources>

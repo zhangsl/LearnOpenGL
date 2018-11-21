@@ -40,8 +40,10 @@ public class Utils {
         if (compileStatus[0] == 0)
         {
             String msg = GLES20.glGetShaderInfoLog(shader);
+            String source = GLES20.glGetShaderSource(shader);
             Log.e("ColorTriangle", "shader info:  " + msg);
-            Log.e("ColorTriangle", "loadShader error   " + shaderCode);
+            Log.e("ColorTriangle", "loadShader error   " + source);
+            throw new RuntimeException("load shader error");
         }
         return shader;
     }
@@ -68,7 +70,7 @@ public class Utils {
         AssetManager assetManager = sContext.getAssets();
 
         Bitmap bitmap = null;
-        try (InputStream istr = assetManager.open(filePath);){
+        try (InputStream istr = assetManager.open(filePath)){
             bitmap = BitmapFactory.decodeStream(istr);
         } catch (IOException e) {
             e.printStackTrace();
@@ -76,6 +78,7 @@ public class Utils {
 
         return bitmap;
     }
+
 
     public static void checkGlError(String glOperation) {
         int error;

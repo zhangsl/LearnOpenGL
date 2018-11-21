@@ -43,4 +43,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+    <Button
+            android:id="@+id/btn_blur"
+            android:text="@string/blur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
 </LinearLayout>

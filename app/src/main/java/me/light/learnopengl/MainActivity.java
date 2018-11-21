@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.light.learnopengl.blur.BlurActivity;
 import me.light.learnopengl.model.ModelDisplayActivity;
 import me.light.learnopengl.shape.StartOpenGLActivity;
 
@@ -57,6 +58,12 @@ public class MainActivity extends Activity {
     @OnClick(R.id.btn_nanosuit)
     public void showNanoSuit(Button btn) {
         Intent intent = new Intent(this, ModelDisplayActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_blur)
+    public void showBlur(Button btn) {
+        Intent intent = new Intent(this, BlurActivity.class);
         startActivity(intent);
     }
 }

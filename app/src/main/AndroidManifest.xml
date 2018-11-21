@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".shape.StartOpenGLActivity" />
-        <activity android:name=".model.ModelDisplayActivity"></activity>
+        <activity android:name=".model.ModelDisplayActivity" />
+        <activity android:name=".blur.BlurActivity"></activity>
     </application>
 
 </manifest>
