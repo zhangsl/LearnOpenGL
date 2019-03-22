@@ -63,7 +63,7 @@ public class MainActivity extends Activity {
 
     @OnClick(R.id.btn_blur)
     public void showBlur(Button btn) {
-        Intent intent = new Intent(this, BlurActivity.class);
+        Intent intent = new Intent(this, SmartActivity.class);
         startActivity(intent);
     }
 }

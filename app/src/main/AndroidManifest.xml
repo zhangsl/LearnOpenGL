@@ -22,7 +22,8 @@
         </activity>
         <activity android:name=".shape.StartOpenGLActivity" />
         <activity android:name=".model.ModelDisplayActivity" />
-        <activity android:name=".blur.BlurActivity"></activity>
+        <activity android:name=".blur.BlurActivity" />
+        <activity android:name=".SmartActivity"></activity>
     </application>
 
 </manifest>
