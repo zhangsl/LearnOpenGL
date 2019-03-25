@@ -49,4 +49,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+    <Button
+            android:id="@+id/btn_gl_canvas"
+            android:text="@string/gl_canvas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
 </LinearLayout>

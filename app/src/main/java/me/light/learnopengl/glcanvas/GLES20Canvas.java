@@ -18,6 +18,8 @@ package me.light.learnopengl.glcanvas;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.opengl.EGL14;
+import android.opengl.EGLExt;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
 import android.opengl.Matrix;

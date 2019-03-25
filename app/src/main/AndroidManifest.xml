@@ -13,6 +13,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".GlCanvasActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +24,7 @@
         <activity android:name=".shape.StartOpenGLActivity" />
         <activity android:name=".model.ModelDisplayActivity" />
         <activity android:name=".blur.BlurActivity" />
-        <activity android:name=".SmartActivity"></activity>
+        <activity android:name=".SmartActivity" />
     </application>
 
 </manifest>

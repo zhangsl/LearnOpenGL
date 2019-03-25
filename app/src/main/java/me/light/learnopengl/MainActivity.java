@@ -66,4 +66,10 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, SmartActivity.class);
         startActivity(intent);
     }
+
+    @OnClick(R.id.btn_gl_canvas)
+    public void showGlCanvas(Button btn) {
+        Intent intent = new Intent(this, GlCanvasActivity.class);
+        startActivity(intent);
+    }
 }
